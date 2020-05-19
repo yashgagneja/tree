@@ -44,89 +44,7 @@ class treefunc{
 					q.push(temp->right);
 			}
 		}
-
-		// Algorithm
-		// 1. Starting at root, find the deepest and rightmost node in binary tree and node which we want to delete.
-		// 2. Replace the deepest rightmost node’s data with node to be deleted.
-		// 3. Then delete the deepest rightmost node.
-
-		void deleteDeepest(Node* root, Node* d_node){
-			queue<Node*> q;
-			q.push(root);
-			// LEVEL ORDER TRAVERSAL FOR LAST NODE
-			Node* temp;
-			while(!q.empty()) {
-				temp=q.front();
-				q.pop();
-
-				if(temp == d_node){
-					temp=NULL;
-					delete (d_node);
-					return ;
-				}
-				if(temp->right){
-					if(temp->right == d_node){
-						temp->right = NULL;
-						delete(d_node);
-						return;
-					}
-					else 
-						q.push(temp->right);
-				}
-				if(temp->left){
-					if(temp->left == d_node){
-						temp->left = NULL;
-						delete(d_node);
-						return;
-					}
-					else 
-						q.push(temp->left);
-				}
-			}
-		}
-
-		// FUNCTION TO DELETE ELEMENT IN BINARY TREE
-		Node* deletion (Node* root, int data){
-			if(root == NULL)
-				return NULL;
-
-			if (root->left == NULL && root->right == NULL){
-				if(root->data == data)
-					return NULL;
-				else
-					return root;
-			}
-
-			queue<Node*> q;
-			q.push(root);
-
-			Node* temp;
-			Node* key_node  = NULL;
-
-			/* Do level order traversal to find deepest 
-			node(temp) and node to be deleted (key_node)*/
-			while(!q.empty()){
-				temp = q.front();
-				q.pop();
-
-				if(temp->data == data)
-					key_node = temp;
-
-				if(temp->left)
-					q.push(temp->left);
-
-				if(temp->right)
-					q.push(temp->right);
-			}
-
-			if(key_node != NULL){
-				int x = temp->data;
-				deleteDeepest(root, temp);
-				key_node->data = x;
-			}
-			return root;
-		}
-};
+ };
 int main(){
 
 	#ifndef ONLINE_JUDGE
@@ -151,16 +69,6 @@ int main(){
 
   	cout<<endl << "Inorder after insertion : ";
   	tree.inorder(root);
-
-	cout << "Inorder traversal before deletion : "; 
-    tree.inorder(root); 
-  
-    int key = 11; 
-    root = tree.deletion(root, key); 
-  
-    cout << endl; 
-    cout << "Inorder traversal after deletion : "; 
-    tree.inorder(root); 
-  
-    return 0;   	
+   
+ 	return 0;   	
 }
